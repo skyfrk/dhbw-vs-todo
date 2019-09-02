@@ -1,0 +1,45 @@
+<div class="demo-container" mdl-shadow="2">
+    <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
+        <mdl-layout-header>
+            <mdl-layout-header-row>
+                <mdl-layout-title *ngIf="service.IsLoggedIn" routerLink="/dashboard">{{title}}</mdl-layout-title>
+                <mdl-layout-title *ngIf="!service.IsLoggedIn" routerLink="/login">{{title}}</mdl-layout-title>
+                <mdl-layout-spacer></mdl-layout-spacer>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation" *ngIf="service.IsLoggedIn">
+                    <button mdl-button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button-type="icon"
+                        mdl-ripple>
+                        <mdl-icon>person</mdl-icon>
+                    </button>
+                    <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
+                        <mdl-menu-item mdl-ripple mdl-menu-item-full-bleed-divider routerLink="/settings">Profil
+                        </mdl-menu-item>
+                        <mdl-menu-item mdl-ripple (click)="logout()">Abmelden</mdl-menu-item>
+                    </mdl-menu>
+                </nav>
+                <nav class="mdl-navigation" *ngIf="!service.IsLoggedIn">
+                    <a routerLink="/about" class="mdl-navigation__link">Informier dich</a>
+                </nav>
+            </mdl-layout-header-row>
+        </mdl-layout-header>
+        <mdl-layout-drawer *ngIf="service.IsLoggedIn">
+            <mdl-layout-title>{{title}}</mdl-layout-title>
+
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" routerLink="dashboard"><strong>Übersicht</strong></a>
+                <div class="seperator"></div>
+                <a class="mdl-navigation__link" routerLink="lists">Alle Aufgabenlisten</a>
+                <a class="mdl-navigation__link" routerLink="todos">Alle Aufgaben</a>
+                <div class="seperator"></div>
+                <a class="mdl-navigation__link" *ngFor="let item of favorite.Items" routerLink="todos/{{item.id}}"><span
+                        mdl-badge="{{item.taskCount.open}}">{{item.title}}</span></a>
+            </nav>
+        </mdl-layout-drawer>
+
+        <mdl-layout-content>
+            <dialog-outlet></dialog-outlet>
+            <app-loading *ngIf="!service.initialized || service.ShowLoading"></app-loading>
+            <router-outlet *ngIf="service.initialized"></router-outlet>
+        </mdl-layout-content>
+    </mdl-layout>
+</div>

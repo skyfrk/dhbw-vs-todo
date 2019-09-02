@@ -1,0 +1,33 @@
+.content-container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    // padding-bottom: 80px;
+}
+
+@media only screen and (min-width: 900px) {
+    .content-container {
+        width: 900px;
+        // left: 50%;
+        // transform: translateX(-50%);
+    }
+}
+
+.delte-token:hover{
+    background: black;
+}
+
+.list-item {
+    &:hover {
+        background: lightgray;
+        border-radius: 5px;
+    }
+    &:active {
+        background: gray;
+    }
+    user-select: none;
+    overflow: visible;
+}

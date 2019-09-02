@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="header">
+        <div class="details">
+            <mdl-textfield [(ngModel)]="name" icon="search" type="text" (blur)="filter()"></mdl-textfield>
+        </div>
+        <div class="order-selector">
+            <div class="order-select">
+                <mdl-select #prio floating-label label="Sortieren" [(ngModel)]="orderBy" (change)="filter()">
+                    <mdl-option [value]="">
+                        <div class="option-content">
+                            Keine
+                        </div>
+                    </mdl-option>
+                    <mdl-option [value]="1">
+                        <div class="option-content">
+                            Name
+                        </div>
+                    </mdl-option>
+                    <mdl-option [value]="2">
+                        <div class="option-content">
+                            Datum
+                        </div>
+                    </mdl-option>
+                </mdl-select>
+            </div>
+            <div class="select-dir">
+                <mdl-icon *ngIf="filterASC" (click)="toggleASC()">arrow_drop_up</mdl-icon>
+                <mdl-icon *ngIf="!filterASC" (click)="toggleASC()">arrow_drop_down</mdl-icon>
+            </div>
+        </div>
+    </div>
+</div>

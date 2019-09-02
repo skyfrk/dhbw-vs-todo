@@ -1,0 +1,95 @@
+<app-confirmation-dialog [Text]="'Aufgabenliste Löschen'" (Submit)="deleteFinal($event)"
+    [(IsVisible)]="IsDialogeVisible"></app-confirmation-dialog>
+<app-icon-selector [(SelectedValue)]="SelectedItem"></app-icon-selector>
+<div class="component-content">
+    <div class="content-container">
+        <app-task-list-filter></app-task-list-filter>
+        <div *ngIf="data.length == 0" class="info-text">
+            Sie besitzen Momentan noch keine Aufgabenlisten. <br /> Drücken Sie <mdl-icon>add</mdl-icon> um
+            Aufgabenlisten hinzuzufügen!
+        </div>
+        <mdl-list>
+            <mdl-list-item lines="2" *ngFor="let item of data" class="list-item"
+                (contextmenu)="toggleMenuOn($event, item)" [ngClass]="{'item-active':item.id == contextItem.id}">
+                <mdl-list-item-primary-content *ngIf="!item.isNew && !item.isEdit">
+                    <div class="icon-container">
+                        <mdl-icon class="rename-mee" mdl-list-item-avatar>{{item.icon}}</mdl-icon>
+                        <mdl-icon class="edit" mdl-list-item-avatar (click)="callIconSelector(item)"
+                            mdl-tooltip-large="Icon ändern">edit</mdl-icon>
+                    </div>
+                    <div routerLink="../todos/{{item.id}}">
+                        <span>{{item.title}}</span>
+                        <mdl-list-item-sub-title *ngIf="item.taskCount.open == 1">{{item.taskCount.open}} offener Punkte
+                        </mdl-list-item-sub-title>
+                        <mdl-list-item-sub-title *ngIf="item.taskCount.open != 1">{{item.taskCount.open}} offene Punkte
+                        </mdl-list-item-sub-title>
+                    </div>
+
+                </mdl-list-item-primary-content>
+                <mdl-list-item-primary-content *ngIf="item.isNew ">
+                    <div class="edit-info">
+                        <mdl-icon mdl-list-item-avatar>person</mdl-icon>
+                        <div class="edit-info-group">
+                            <div class="texfield ">
+                                <mdl-textfield id="iName " (blur)="loseFocus($event) " label="Name "></mdl-textfield>
+                            </div>
+                            <div class="info ">
+                                <mdl-list-item-sub-title>0 Offene Punkte</mdl-list-item-sub-title>
+                            </div>
+                        </div>
+                    </div>
+                </mdl-list-item-primary-content>
+                <mdl-list-item-primary-content *ngIf="item.isEdit ">
+                    <mdl-icon mdl-list-item-avatar>{{item.icon}}</mdl-icon>
+                    <div class="texfield ">
+                        <mdl-textfield id="iName " (blur)="saveChanges(item, $event.srcElement.value) "
+                            [ngModel]="item.title" label="Name ">
+                        </mdl-textfield>
+                    </div>
+                    <div class="info ">
+                        <mdl-list-item-sub-title *ngIf="item.taskCount.open == 1">{{item.taskCount.open}} offener Punkte
+                        </mdl-list-item-sub-title>
+                        <mdl-list-item-sub-title *ngIf="item.taskCount.open != 1">{{item.taskCount.open}} offene Punkte
+                        </mdl-list-item-sub-title>
+                    </div>
+                </mdl-list-item-primary-content>
+                <mdl-list-item-secondary-action>
+                    <!-- <mdl-list-item-secondary-info>favorite</mdl-list-item-secondary-info> -->
+                    <a>
+                        <!-- <mdl-icon class="black-icon " (click)="confirmDelete.toggle($event) ">delete</mdl-icon> -->
+                        <mdl-icon *ngIf="item.isFavorite" class="test" mdl-tooltip-large="Von Favoriten enfernen"
+                            (click)="favoriteItem(item, $event) ">star
+                        </mdl-icon>
+                        <mdl-icon *ngIf="!item.isFavorite" class="test" (click)="favoriteItem(item, $event)"
+                            mdl-tooltip-large="Zu Favoriten hinzufügen">
+                            star_border</mdl-icon>
+                    </a>
+                </mdl-list-item-secondary-action>
+            </mdl-list-item>
+        </mdl-list>
+    </div>
+</div>
+
+<nav class="context-menu" [ngClass]="{'context-menu--active':contextMenuActive}" [style.top]="menuTop"
+    (contextmenu)="$event.preventDefault()" [style.left]="menuLeft">
+    <ul class="context-menu__items">
+        <li class="context-menu__item">
+            <a class="context-menu__link" (click)="showDashboard()">
+                <i class="fa fa-eye"></i> Übersicht
+            </a>
+        </li>
+        <div class="divider"></div>
+        <li class="context-menu__item">
+            <a class="context-menu__link" (click)="setEditMenu()">
+                <i class="fa fa-edit"></i> Bearbeiten
+            </a>
+        </li>
+        <li class="context-menu__item">
+            <a class="context-menu__link" (click)="deleteMenu()">
+                <i class="fa fa-times"></i> Löschen
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<app-add-button (buttonClick)="addNewList()"></app-add-button>

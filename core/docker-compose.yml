@@ -1,0 +1,26 @@
+version: "3"
+services:
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: todo
+  adminer:
+    image: adminer
+    ports:
+      - 6002:8080
+    depends_on:
+      - db
+  core:
+    build: .
+    ports:
+      - "6001:80"
+    volumes:
+      - ./app:/var/www/html/
+    environment:
+      # as of now there is no proper way reslove the host ip address
+      # fix is on its way though: https://github.com/docker/libnetwork/pull/2348
+      - XDEBUG_CONFIG=remote_host=CHANGE_ME_TO_HOST_IP remote_port=9000 remote_enable=1 remote_autostart=1
+    depends_on:
+      - db
+   

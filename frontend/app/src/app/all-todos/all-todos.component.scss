@@ -1,0 +1,143 @@
+.content-container {
+    width: 90%;
+    // height:calc(100%-80px);
+    max-width: 900px;
+    margin: 0 auto 80px auto;
+}
+
+@media only screen and (min-width: 900px) {
+    .content-container {
+        width: 900px;
+    }
+}
+
+.list-item:hover {
+    background: lightgray;
+    border-radius: 5px;
+}
+
+.item-active {
+    background: lightgray;
+    border-radius: 5px;
+}
+
+.search {
+    position: absolute;
+    right: 0px;
+}
+
+.edit {
+    left: 0;
+    position: absolute;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.edit:hover {
+    position: absolute;
+    opacity: 1;
+}
+
+.test:hover {
+    color: darkorange;
+}
+
+.texfield {
+    position: relative;
+
+    @media only screen and (max-width: 500px) {
+    &{
+        position: relative;
+        display: flex;
+        width: 40vw;
+    }
+}
+}
+
+.info {
+    position: relative;
+    left: 55px;
+    margin-top: -15px;
+}
+
+.black-icon {
+    color: gray;
+}
+
+.black-icon:hover {
+    color: black;
+}
+
+.icon-container {
+    position: relative;
+}
+
+.icon-container:hover .edit {
+    opacity: 0.95;
+}
+
+
+.info-text{
+    text-align: center;
+    margin-top: 50px;
+    line-height: 75px;
+    color:#5c5c5c;
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.edit-info{
+    .edit-info-group{
+        position: relative;
+    }
+
+    mdl-icon{
+        margin-top:25px;
+    }
+}
+
+.context-menu {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding: 12px 0;
+    width: 240px;
+    background-color: #fff;
+    border: solid 1px #dfdfdf;
+    box-shadow: 1px 1px 2px #cfcfcf;
+  }
+  
+  .context-menu--active {
+    display: block;
+  }
+  
+  .context-menu__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .context-menu__item {
+    display: block;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+  
+  .context-menu__item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .context-menu__link {
+    display: block;
+    padding: 4px 12px;
+    color: rgb(244,67,54);
+    text-decoration: none;
+  }
+  
+  .context-menu__link:hover {
+    color: #fff;
+    background-color: rgb(244,67,54);
+  }
+
+  .divider{
+      border-top: .5px solid lightgray;
+  }

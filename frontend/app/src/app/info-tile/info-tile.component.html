@@ -1,0 +1,11 @@
+<div class="open-tasks" [mdl-shadow]="2">
+    <mdl-icon class="icon">{{icon}}</mdl-icon>
+    <div [ngClass]="{'text-dynamic':smallScreen,'text':!smallScreen}">
+        <div class="info">
+            {{info}}
+        </div>
+        <div class="title">
+            {{title}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="background">
+
+
+    <div class="inputs">
+        <form #f="ngForm" (ngSubmit)="login(f)">
+            <div class="input-fields">
+                <div *ngIf="confirmed">
+                    Account wurde aktiviert, sie können sich nun anmelden.
+                </div>
+                <div class="inputRange">
+                    <mdl-textfield type="e-mail" label="E-Mail..." floating-label ngModel name="mail"></mdl-textfield>
+                    <mdl-textfield type="password" label="Passwort..." floating-label ngModel name="password">
+                    </mdl-textfield>
+                    <div>
+                        {{info}}
+                    </div>
+                    <mdl-checkbox [mdl-ripple]="true" ngModel name="rememberMe">Passwort speichern</mdl-checkbox>
+
+                    <div>
+
+                        <button mdl-button mdl-button-type="raised" class="add-button" mdl-colored="primary"
+                            mdl-ripple>Anmelden</button>
+                        <div>
+                            <a routerLink="/register">Noch kein Account?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="model" *ngIf="SelectedValue" (click)="close()">
+    <!-- <div class="model"> -->
+    <div class="content">
+        <div>
+            <div class="cancel-button" (click)="close()">
+                <mdl-icon class="button">cancel</mdl-icon>
+            </div>
+            <div class="icon-container">
+                <mdl-icon *ngFor="let item of Icons" class="icon" (click)="save(item)">{{item}}</mdl-icon>
+            </div>
+        </div>
+    </div>
+</div>

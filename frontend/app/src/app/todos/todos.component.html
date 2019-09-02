@@ -1,0 +1,152 @@
+<div class="content-container">
+    <div *ngIf="AllTodods.length == 0" class="info-text">
+        Die Aufgabenliste besizt noch keine Aufgaben.
+        <div *ngIf="TaskListId"> Drücken Sie <mdl-icon>add</mdl-icon> um
+            Aufgaben hinzuzufügen! </div>
+    </div>
+    <app-search-bar *ngIf="AllTodods.length != 0"></app-search-bar>
+
+    <mdl-list class="list" [ngClass]="{'list-bottom':isReadOnly}">
+        <mdl-list-item lines="2" class="list-item" *ngFor="let item of AllTodods; last as isLast; index as currIndex"
+            [ngClass]="{'new-task':item.isNew, 'mark-select':item.id == markWithId }">
+
+            <!-- Neue Items -->
+            <mdl-list-item-primary-content *ngIf="item.isNew">
+                <mdl-icon mdl-list-item-avatar class="save-icon" mdl-tooltip-large="Speichern"
+                    (click)="addNewTask(title,desc,prio)">
+                    save
+                </mdl-icon>
+                <div class="newInput">
+                    <mdl-textfield floating-label label="Titel" id="title-input" #title></mdl-textfield>
+                    <mdl-textfield floating-label label="Beschreibung" #desc></mdl-textfield>
+                    <div class="prio">
+                        <mdl-select #prio floating-label label="Priorität">
+                            <mdl-option [value]="1">
+                                <div class="option-content">
+                                    <mdl-icon style="color:red;">priority_high
+                                    </mdl-icon>
+                                    Sehr Hoch
+                                </div>
+                            </mdl-option>
+                            <mdl-option [value]="2">
+                                <div class="option-content">
+                                    <mdl-icon style="color:orange;">priority_high</mdl-icon>
+                                    Hoch
+                                </div>
+                            </mdl-option>
+                            <mdl-option [value]="3">
+                                <div class="option-content">
+                                    <mdl-icon style="color:yellow;">priority_high</mdl-icon>
+                                    Normal
+                                </div>
+                            </mdl-option>
+                            <mdl-option [value]="4">
+                                <div class="option-content">
+                                    <mdl-icon style="color:green;">priority_high</mdl-icon>
+                                    Niedrig
+                                </div>
+                            </mdl-option>
+                            <mdl-option [value]="5">
+                                <div class="option-content">
+                                    <mdl-icon style="color:yellowgreen;">priority_high</mdl-icon>
+                                    Sehr Niedrig
+                                </div>
+                            </mdl-option>
+                        </mdl-select>
+                    </div>
+                    <div class="calendar">
+                        <button (click)="pickADate($event)" mdl-button mdl-button-type="icon" mdl-ripple>
+                            <mdl-icon>event</mdl-icon>
+                        </button>
+                        <span *ngIf="selectedDate">{{ selectedDate | date: 'dd.MM.'}}</span>
+                    </div>
+                </div>
+                <mdl-list-item-sub-title>{{item.description}}</mdl-list-item-sub-title>
+            </mdl-list-item-primary-content>
+
+            <!-- Alte Items (von Server geladen) -->
+            <mdl-list-item-primary-content *ngIf="!item.isNew">
+                <mdl-icon mdl-list-item-avatar style="background-color:red;" *ngIf="item.state == 0"
+                    mdl-tooltip-large="Offen">error_outline</mdl-icon>
+                <!-- <mdl-icon mdl-list-item-avatar style="background-color:red;" *ngIf="item.state == 0" mdl-tooltip-large="Offen">report</mdl-icon> -->
+                <mdl-icon mdl-list-item-avatar style="background-color:orange;" *ngIf="item.state == 1"
+                    mdl-tooltip-large="Aktiv">build</mdl-icon>
+                <mdl-icon mdl-list-item-avatar style="background-color:green;" *ngIf="item.state == 2"
+                    mdl-tooltip-large="Erledigt">done</mdl-icon>
+                <mdl-icon mdl-list-item-avatar style="background-color:black; color:white" *ngIf="item.state == 3"
+                    mdl-tooltip-large="Abgebrochen">delete</mdl-icon>
+                <span>{{item.title}}</span>
+                <div class="slider" *ngIf="win.innerWidth > mobileSize;">
+                    <mdl-slider [(ngModel)]="item.state" [max]="3" [min]="0" [step]="1" (change)="saveItem(item)">
+                    </mdl-slider>
+                </div>
+                <div class="picker"
+                    *ngIf="win.innerWidth <= mobileSize  && currIndex > AllTodods.length - 4 && currIndex > 3">
+                    <button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button mdl-button-type="icon"
+                        mdl-ripple>
+                        <mdl-icon>more_vert</mdl-icon>
+                    </button>
+                    <mdl-menu #m1="mdlMenu" mdl-menu-position="top-right">
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(0,item)" mdl-ripple>
+                            <mdl-icon>error_outline</mdl-icon> Offen
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(1,item)" mdl-ripple>
+                            <mdl-icon>build</mdl-icon> Aktiv
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(2,item)" mdl-ripple>
+                            <mdl-icon>done</mdl-icon> Erledigt
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(3,item)" mdl-ripple>
+                            <mdl-icon>delete</mdl-icon> Abgebrochen
+                        </mdl-menu-item>
+                    </mdl-menu>
+                </div>
+                <div class="picker"
+                    *ngIf="win.innerWidth <= mobileSize && (currIndex < AllTodods.length - 3 || currIndex <= 3)">
+                    <button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button mdl-button-type="icon"
+                        mdl-ripple>
+                        <mdl-icon>more_vert</mdl-icon>
+                    </button>
+                    <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(0,item)" mdl-ripple>
+                            <mdl-icon>error_outline</mdl-icon> Offen
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(1,item)" mdl-ripple>
+                            <mdl-icon>build</mdl-icon> Aktiv
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(2,item)" mdl-ripple>
+                            <mdl-icon>done</mdl-icon> Erledigt
+                        </mdl-menu-item>
+                        <mdl-menu-item class="picker-item" (click)="changeItemState(3,item)" mdl-ripple>
+                            <mdl-icon>delete</mdl-icon> Abgebrochen
+                        </mdl-menu-item>
+                    </mdl-menu>
+                </div>
+                <mdl-list-item-sub-title>{{item.description}}</mdl-list-item-sub-title>
+            </mdl-list-item-primary-content>
+            <mdl-list-item-secondary-content *ngIf="!item.isNew">
+                <div class="secondary-content">
+                    <div class="date">
+                        {{ item.dateDeadline | date: 'dd.MM.yy'}}
+                    </div>
+                    <a>
+                        <mdl-icon style="color:red;" *ngIf="item.priority == 1" mdl-tooltip-large="Sehr Hohe Priorität">
+                            priority_high
+                        </mdl-icon>
+                        <mdl-icon style="color:orange;" *ngIf="item.priority == 2" mdl-tooltip-large="Hohe Priorität">
+                            priority_high</mdl-icon>
+                        <mdl-icon style="color:yellow;" *ngIf="item.priority == 3"
+                            mdl-tooltip-large="Normale Priorität">priority_high</mdl-icon>
+                        <mdl-icon style="color:green;" *ngIf="item.priority == 4"
+                            mdl-tooltip-large="Niedrige Priorität">priority_high</mdl-icon>
+                        <mdl-icon style="color:yellowgreen;" *ngIf="item.priority == 5"
+                            mdl-tooltip-large="Sehr Niedrige Priorität">priority_high</mdl-icon>
+                    </a>
+                </div>
+            </mdl-list-item-secondary-content>
+        </mdl-list-item>
+    </mdl-list>
+</div>
+
+<app-add-button *ngIf="!isReadOnly" (buttonClick)="addEmptyTask()" [AltIcon]="'cancel'" [ShowAltIcon]="ShowAltIcon">
+</app-add-button>

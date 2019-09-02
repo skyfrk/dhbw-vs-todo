@@ -1,0 +1,8 @@
+<div class="addButton" [mdl-shadow]="8">
+    <mdl-button mdl-button-type="fab" mdl-ripple (click)="buttonClick.emit($event)" *ngIf="!ShowAltIcon">
+        <mdl-icon>add</mdl-icon>
+    </mdl-button>
+    <mdl-button mdl-button-type="fab" mdl-ripple (click)="buttonClick.emit($event)" *ngIf="ShowAltIcon">
+        <mdl-icon>{{AltIcon}}</mdl-icon>
+    </mdl-button>
+</div>

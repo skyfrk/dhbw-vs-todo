@@ -1,0 +1,51 @@
+.inputRange {
+    margin-top: 15px;
+    a {
+        padding-top: 30px;
+    }
+}
+
+.background {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: lightblue;
+    background-image: url("../../assets/retro.jpeg");
+    z-index: 0;
+}
+
+.content {
+    z-index: 1;
+}
+
+.inputs {
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    margin:50px auto 0 auto;
+    
+    @media only screen and (max-width: 850px) {
+        display: block;
+        margin:50px auto 0 auto;
+        width:80%;
+    }
+    @media only screen and (min-width: 850px) {
+        width: 800px;
+        min-height: 25%;
+    }
+}
+
+.fields{
+    mdl-textfield{
+        margin:6px 0 9px 0;
+        line-height: 1;
+    }
+}
+
+.add-button{
+    margin-top:30px;
+    margin-bottom: 10px; 
+}

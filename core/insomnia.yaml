@@ -1,0 +1,730 @@
+_type: export
+__export_format: 4
+__export_date: 2019-07-17T12:55:43.493Z
+__export_source: insomnia.desktop.app:v6.5.4
+resources:
+  - _id: req_cd35e492a99a4e368711116eda43c23d
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"mail": "some@mail.com",
+        	"displayName": "somedude13",
+        	"password": "sUperdupersecret13!"
+        }
+    created: 1555164623289
+    description: ""
+    headers:
+      - id: pair_beca8ca757c6416582fe492da3d3e3b3
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1555537897293
+    method: POST
+    modified: 1563289986843
+    name: Register
+    parameters: []
+    parentId: fld_8f075536c54e4b84b38c3fee387ae4df
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/register"
+    _type: request
+  - _id: fld_8f075536c54e4b84b38c3fee387ae4df
+    created: 1555164607676
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1563201879709
+    modified: 1563202597214
+    name: Authentication
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: request_group
+  - _id: wrk_d11d635a13b2457a9c887690b89cab92
+    created: 1555164577211
+    description: ""
+    modified: 1555164577211
+    name: DHBW VS Todo App
+    parentId: null
+    _type: workspace
+  - _id: req_653fe4045a0249a58dded7d3e80267c6
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"mail": "some@mail.com"
+        }
+    created: 1563034330044
+    description: ""
+    headers:
+      - id: pair_6b0cb5aedf6642ccbdd915787c36c2c4
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1555537897280.5
+    method: POST
+    modified: 1563034939714
+    name: Resend registration mail
+    parameters: []
+    parentId: fld_8f075536c54e4b84b38c3fee387ae4df
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/register/resend"
+    _type: request
+  - _id: req_c289e244b987433ea07ed9d194d3445e
+    authentication: {}
+    body: {}
+    created: 1555165203061
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1555537897268
+    method: GET
+    modified: 1563034923502
+    name: Confirm registration
+    parameters: []
+    parentId: fld_8f075536c54e4b84b38c3fee387ae4df
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/register/confirm/140d307d73f0cc227e210834d2e23739"
+    _type: request
+  - _id: req_993ca7527f0842489cb6a6a642418efc
+    authentication:
+      token: ""
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"mail": "some@mail.com",
+        	"password": "sUperdupersecret13!",
+        	"rememberMe": true
+        }
+    created: 1555165276366
+    description: ""
+    headers:
+      - id: pair_a7f6684b40e547b9bf52a011808860af
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1555537897255.5
+    method: POST
+    modified: 1563367539753
+    name: Get JWT (login)
+    parameters: []
+    parentId: fld_8f075536c54e4b84b38c3fee387ae4df
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/login"
+    _type: request
+  - _id: req_eb094ff222b940f1a40eb59e36277c70
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt' %}"
+      type: bearer
+    body: {}
+    created: 1555537897243
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1555537897243
+    method: POST
+    modified: 1557570858177
+    name: Renew JWT
+    parameters: []
+    parentId: fld_8f075536c54e4b84b38c3fee387ae4df
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/login/renew"
+    _type: request
+  - _id: req_35e6e3768dc14c79be7f00d94c6038cc
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc',
+        'b64::JC5qd3Q=::46b', 'never' %}"
+      type: bearer
+    body: {}
+    created: 1563202106078
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1563202182686
+    method: GET
+    modified: 1563285799400
+    name: Get active JWTs
+    parameters:
+      - id: pair_c04623b8e31b472bb4cd032140ec5384
+        name: limit
+        value: "100"
+      - id: pair_42d2fe87ab8c416098e088e337121d43
+        name: offset
+        value: "0"
+    parentId: fld_c92c0abd049245749bf44fcca8ddb13a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/user/tokens"
+    _type: request
+  - _id: fld_c92c0abd049245749bf44fcca8ddb13a
+    created: 1563201879659
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1563201879659
+    modified: 1563201879659
+    name: User
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: request_group
+  - _id: req_fe63478cedf0484d8b986df4242cc86b
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc',
+        'b64::JC5qd3Q=::46b', 'never' %}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"password": "sUperdupersecret13!"
+        }
+    created: 1563202182636
+    description: ""
+    headers:
+      - id: pair_9fad8964820b48ab8f4119f8462c8fd0
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1563202182636
+    method: POST
+    modified: 1563367980729
+    name: Invalidate JWT by ID
+    parameters: []
+    parentId: fld_c92c0abd049245749bf44fcca8ddb13a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/user/token/3"
+    _type: request
+  - _id: req_620d5cd62f394a1096d3911029cfffbc
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557577643395
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1557577643395
+    method: GET
+    modified: 1563367801415
+    name: Get Tasks
+    parameters:
+      - id: pair_b3260b521efb433da33ac944c80a192b
+        name: limit
+        value: "100"
+      - id: pair_592859d7d57c4c8e8ecc37dbe745a8f2
+        name: offset
+        value: "0"
+      - disabled: true
+        id: pair_84bb1a63b4d14ec8b62c87f51942265e
+        name: title
+        value: some
+      - disabled: true
+        id: pair_fb16f2abd5be4956a808bfbdd4f9067e
+        name: state
+        value: "0"
+      - disabled: true
+        id: pair_daf13b3f9dac49c190c047efa64cfddc
+        name: priority
+        value: "2"
+      - disabled: true
+        id: pair_e6377f1709344daba26a4147dd065994
+        name: tasklist
+        value: "2"
+      - disabled: false
+        id: pair_1b2b87ae083c42b29a19aea688d10625
+        name: sort_by
+        value: urgency
+      - disabled: false
+        id: pair_00656820627447f3aa5113d9c27e490c
+        name: sort_order
+        value: asc
+    parentId: fld_cc4c856d700b427baf3e8634eef37f52
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/tasks"
+    _type: request
+  - _id: fld_cc4c856d700b427baf3e8634eef37f52
+    created: 1557577624694
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1557577624694
+    modified: 1557577624694
+    name: Tasks
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: request_group
+  - _id: req_6a1770d839d440a09e5ea5880ab3ba45
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557577705785
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1557574189574
+    method: GET
+    modified: 1557671832227
+    name: Get Task by ID
+    parameters: []
+    parentId: fld_cc4c856d700b427baf3e8634eef37f52
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/tasks/8"
+    _type: request
+  - _id: req_5affa4f8e8aa4fd0882108aeacd3036f
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "title": "Some update task title",
+            "description": "some task description",
+            "priority": 2,
+            "dateDeadline": null,
+        	"state": "0"
+        }
+    created: 1557577730905
+    description: ""
+    headers:
+      - id: pair_e7347adeafe846f3aa9e75393cd95e94
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1557572462663.5
+    method: PUT
+    modified: 1562926491781
+    name: Update Task by ID
+    parameters: []
+    parentId: fld_cc4c856d700b427baf3e8634eef37f52
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/tasks/15"
+    _type: request
+  - _id: req_1c447e8803b1402084c540b04c209cb0
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557577792926
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1557572462613.5
+    method: DELETE
+    modified: 1557672026650
+    name: Delete Task by ID
+    parameters: []
+    parentId: fld_cc4c856d700b427baf3e8634eef37f52
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/tasks/2"
+    _type: request
+  - _id: req_3697b5357aaf4d018bf34a782099c44e
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557570735753
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1557570735753
+    method: GET
+    modified: 1563027669044
+    name: Get TaskLists
+    parameters:
+      - id: pair_d5e77dccc72d473f992bd862a7513ac8
+        name: limit
+        value: "20"
+      - id: pair_ebdd87b1406041fc95ef5971a4709bf8
+        name: offset
+        value: "0"
+      - disabled: true
+        id: pair_dee5e3b637ee433b946940f71e403d2d
+        name: is_favorite
+        value: "false"
+      - disabled: true
+        id: pair_6782742f459b44b7b47bd2ef3d0c9672
+        name: title
+        value: ome
+      - disabled: false
+        id: pair_7e225d879c8345ac9b6432fe0d2f78ef
+        name: sort_by
+        value: title
+      - disabled: true
+        id: pair_cff630fc35d34ae1b658926d4c2a486e
+        name: sort_order
+        value: desc
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists"
+    _type: request
+  - _id: fld_e4f0ec611f65428f98a6289edd3fc72f
+    created: 1557570716995
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1557570716995
+    modified: 1557570716995
+    name: TaskLists
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: request_group
+  - _id: req_86512860780a475081ca630efd14387c
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "title": "cSome title 2",
+            "icon": "someiconname"
+        }
+    created: 1557571167294
+    description: ""
+    headers:
+      - id: pair_ff4ee9fc253e4c28aec8daa640bdaa93
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1556554316498
+    method: POST
+    modified: 1562851841249
+    name: Create TaskList
+    parameters: []
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists"
+    _type: request
+  - _id: req_9bbe778bd7c049b99598ab2502e2c512
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557572852811
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1556046106870.5
+    method: GET
+    modified: 1563281745775
+    name: Get TaskList by ID
+    parameters: []
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/1"
+    _type: request
+  - _id: req_318dff4b6dbb4e208e997737402746ca
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "title": "Some update title2",
+            "icon": "someiconname",
+        		"isFavorite": true
+        }
+    created: 1557577232549
+    description: ""
+    headers:
+      - id: pair_34d9a716d22346208abe49972c0b02c3
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1555792002056.75
+    method: PUT
+    modified: 1563281753804
+    name: Update TaskList by ID
+    parameters: []
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/7"
+    _type: request
+  - _id: req_b62afe98df994e978b187f748dd5eb39
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557577295611
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1555792002006.75
+    method: DELETE
+    modified: 1563281760402
+    name: Delete TaskList by ID
+    parameters: []
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/7"
+    _type: request
+  - _id: req_6676d9aab13446c6bb16d66f2d475439
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body: {}
+    created: 1557577365244
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1555792001956.75
+    method: GET
+    modified: 1562940017810
+    name: Get Tasks for TaskList with ID
+    parameters:
+      - id: pair_4c1ede11718446858e86b5074c32939d
+        name: limit
+        value: "100"
+      - id: pair_61846362a6974e37a2d284d08c90eeed
+        name: offset
+        value: "0"
+      - disabled: true
+        id: pair_882d79c6250c4cd5875bc92f937de868
+        name: title
+        value: some
+      - disabled: true
+        id: pair_7edb49d87b7d45bb9ba1a8494ab11523
+        name: state
+        value: "0"
+      - disabled: true
+        id: pair_0cddd7dba8b8488a9a7c687a668624a0
+        name: priority
+        value: "2"
+      - id: pair_6c6cc7b6cc1c4cba89af6bab46e52e2a
+        name: sort_by
+        value: urgency
+      - id: pair_cb53417d52ec4a63bc4e0abb1da183bd
+        name: sort_order
+        value: asc
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/2/tasks"
+    _type: request
+  - _id: req_4d3633cc00444741b4642cfc5e7b3953
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc', '$.jwt',
+        'never' %}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "title": "Title yoooooooooo",
+            "description": "some task description",
+            "priority": 5
+        }
+    created: 1557577511976
+    description: ""
+    headers:
+      - id: pair_cf3efad27964424588d81bf5be2bfbcf
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1555664949599.875
+    method: POST
+    modified: 1562926443763
+    name: Create Task for TaskList with ID
+    parameters: []
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/2/tasks"
+    _type: request
+  - _id: req_dd9673136b0c42c188f0c82925941d03
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc',
+        'b64::JC5qd3Q=::46b', 'never' %}"
+      type: bearer
+    body: {}
+    created: 1562598057408
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1555664949549.875
+    method: GET
+    modified: 1562849421466
+    name: Get Report for TaskList with ID
+    parameters:
+      - id: pair_b62ae123b8d7414ba935b4926684d609
+        name: days
+        value: "7"
+    parentId: fld_e4f0ec611f65428f98a6289edd3fc72f
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/taskLists/2/report"
+    _type: request
+  - _id: req_e41ac84f33a942e89817e3299dc6f16d
+    authentication:
+      token: "{% response 'body', 'req_993ca7527f0842489cb6a6a642418efc',
+        'b64::JC5qd3Q=::46b', 'never' %}"
+      type: bearer
+    body: {}
+    created: 1562006481348
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1562006481348
+    method: GET
+    modified: 1562859989655
+    name: Get Report
+    parameters:
+      - id: pair_1f7781d3e4f94f74b7faf94871991679
+        name: days
+        value: "7"
+    parentId: fld_51e04e331daa4067b70d554d90bb9d6e
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ base_url  }}/report"
+    _type: request
+  - _id: fld_51e04e331daa4067b70d554d90bb9d6e
+    created: 1562006460056
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1557570716945
+    modified: 1563202613900
+    name: Reports
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: request_group
+  - _id: env_cd097626765446d6bf15210774cdda58
+    color: null
+    created: 1555164577231
+    data:
+      base_url: localhost:6001/api
+    dataPropertyOrder: null
+    isPrivate: false
+    metaSortKey: 1555164577231
+    modified: 1555165153920
+    name: New Environment
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: environment
+  - _id: jar_934c7c3c8f5e4c1582d19d1c15a8edb9
+    cookies:
+      - creation: 2019-07-11T12:18:58.167Z
+        domain: dhbwtodocoredevwa.azurewebsites.net
+        hostOnly: false
+        httpOnly: true
+        id: "2918960529099961"
+        key: ARRAffinity
+        lastAccessed: 2019-07-15T14:51:08.275Z
+        path: /
+        value: f5ecfb306e60620010bb76308e041dc8ca96ba5fca7967d574bfef606d2482e1
+    created: 1555164577237
+    modified: 1563202268275
+    name: Default Jar
+    parentId: wrk_d11d635a13b2457a9c887690b89cab92
+    _type: cookie_jar
+  - _id: env_23976b7ac0684684a1b2d60ad5b7556e
+    color: "#00ff1c"
+    created: 1556896822080
+    data:
+      base_url: localhost:6001/api
+    dataPropertyOrder: null
+    isPrivate: false
+    metaSortKey: 1556896822080
+    modified: 1556901270723
+    name: Local
+    parentId: env_cd097626765446d6bf15210774cdda58
+    _type: environment
+  - _id: env_285a8a2170c54fa6823a1f95e8d4d3ad
+    color: "#3400ff"
+    created: 1556896830360
+    data:
+      base_url: https://dhbwtodocoredevwa.azurewebsites.net/api
+    dataPropertyOrder:
+      "&":
+        - base_url
+    isPrivate: false
+    metaSortKey: 1556896830360
+    modified: 1562230539685
+    name: Azure
+    parentId: env_cd097626765446d6bf15210774cdda58
+    _type: environment

@@ -1,0 +1,113 @@
+<div class="wrapper">
+    <div class="header">
+        <div class="details">
+            <mdl-icon *ngIf="!isOpen" (click)="toggle()">search</mdl-icon>
+            <mdl-icon *ngIf="isOpen" (click)="toggle()">cancel</mdl-icon>
+        </div>
+        <div class="order-selector">
+            <div class="order-select">
+                <mdl-select #prio floating-label label="Sortieren" [(ngModel)]="filterBy" (change)="sort()">
+                    <mdl-option [value]="">
+                        <div class="option-content">
+                            Keine
+                        </div>
+                    </mdl-option>
+                    <mdl-option [value]="1">
+                        <div class="option-content">
+                            Name
+                        </div>
+                    </mdl-option>
+                    <mdl-option [value]="2">
+                        <div class="option-content">
+                            Priorität
+                        </div>
+                    </mdl-option>
+                    <mdl-option [value]="3">
+                        <div class="option-content">
+                            Status
+                        </div>
+                    </mdl-option>
+                </mdl-select>
+            </div>
+            <div>
+                <mdl-icon *ngIf="filterASC == true" (click)="toggleASC()">arrow_drop_up</mdl-icon>
+                <mdl-icon *ngIf="filterASC == false" (click)="toggleASC()">arrow_drop_down</mdl-icon>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{'content':isOpen,'content-hidden':!isOpen }">
+        <div class="searchbar">
+
+            <mdl-textfield (blur)="filter()" floating-label label="Titel" id="title-input" #title
+                [(ngModel)]="filterValue.title" name="title">
+            </mdl-textfield>
+            <mdl-select #prio floating-label label="Status" (change)="filter()" [(ngModel)]="filterValue.state"
+                name="state">
+                <mdl-option [value]="">
+                    <div class="option-content">
+                        Alle
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="0">
+                    <div class="option-content">
+                        <mdl-icon style="color:red;">error_outline
+                        </mdl-icon>
+                        Offen
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="1">
+                    <div class="option-content">
+                        <mdl-icon style="color:orange;">build</mdl-icon>
+                        Aktiv
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="2">
+                    <div class="option-content">
+                        <mdl-icon style="color:green;">done</mdl-icon>
+                        Fertig
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="3">
+                    <div class="option-content">
+                        <mdl-icon style="color:black;">delete</mdl-icon>
+                        Abgebrochen
+                    </div>
+                </mdl-option>
+            </mdl-select>
+
+            <mdl-select #prio floating-label label="Priorität" (change)="filter()" [(ngModel)]="filterValue.priority"
+                name="prio">
+                <mdl-option [value]="">
+                    <div class="option-content">
+                        Alle
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="1">
+                    <div class="option-content">
+                        Sehr Hoch
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="2">
+                    <div class="option-content">
+                        Hoch
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="3">
+                    <div class="option-content">
+                        Mittel
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="4">
+                    <div class="option-content">
+                        Niedrig
+                    </div>
+                </mdl-option>
+                <mdl-option [value]="5">
+                    <div class="option-content">
+                        Sehr Niedrig
+                    </div>
+                </mdl-option>
+            </mdl-select>
+        </div>
+    </div>
+</div>

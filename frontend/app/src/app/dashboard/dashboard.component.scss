@@ -1,0 +1,42 @@
+.content{
+    position: relative;
+    margin:0 auto 0 auto;
+}
+.content-wrapper{
+    position: relative;
+    display:flex;
+
+    @media only screen and (max-width: 385px) {
+        &{
+            display: block;
+        }
+    }
+}
+
+.info-wrapper{
+    display:flex;
+    position:relative;
+    div{
+        width: 53%;
+        position: relative;
+    }
+
+    // margin: 50px;
+}
+
+.controls{
+    display:block;
+    position: relative;
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 0;
+
+    mdl-slider{
+        margin-bottom: 5px;
+    }
+}
+
+.seperator{
+    font-size:16px;
+    text-align: center;
+}

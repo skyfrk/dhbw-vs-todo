@@ -1,0 +1,17 @@
+.addButton {
+    height: 80px;
+    // height:10vh;
+    align-items: center;
+    // box-shadow: #000000 2px;
+    // padding: 0 0 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+    background: white;
+    z-index: 2;
+    @media only screen and (min-width: 900px) {
+        margin-left: 0px;
+    }
+}

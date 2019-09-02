@@ -1,0 +1,13 @@
+<!-- The Modal -->
+<div id="myModal" class="modal" *ngIf="IsVisible">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>{{Text}}</p>
+        <div class="modal-buttons">
+            <mdl-icon class="accept" (click)="done(true);">done</mdl-icon>
+            <mdl-icon class="calcel" (click)="done(false);">cancel</mdl-icon>
+        </div>
+    </div>
+
+</div>

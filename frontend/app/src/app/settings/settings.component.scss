@@ -1,0 +1,41 @@
+.title{
+    color:rgba($color: #000000, $alpha: 0.8);
+    font-size: 18px;
+    margin:25px auto;
+    position: relative;
+    text-align: center;
+}
+
+
+.settings-divider {
+    margin: 200px 0 60px 0;
+    display:flex;
+    &::after{
+        content: '';
+        border-top: 1px solid rgba($color: #000000, $alpha: 0.8);
+        height: 2px;
+        width: 75%;
+        float: right;
+
+        margin:9px 60px 0 15px;
+        @media only screen and (min-width: 1450px) {
+            margin:9px 300px 0 15px;
+        }
+    }
+    &::before{
+        content: '';
+        border-top: 1px solid rgba($color: #000000, $alpha: 0.8);
+        height: 2px;
+        width: 75%;
+        float: left;   
+
+        margin:9px 15px 0 60px;
+        @media only screen and (min-width: 1450px) {
+            margin:9px 15px 0 300px;
+        }
+    }
+}
+
+.user-data{
+    margin-left: 500px;
+}

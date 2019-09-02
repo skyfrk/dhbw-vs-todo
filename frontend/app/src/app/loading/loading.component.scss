@@ -1,0 +1,43 @@
+.loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid rgb(244,67,54);
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    left: calc(50%);
+    top: calc(45%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-wrapper{
+    position: relative;
+    margin:auto;
+    display:table;
+    top:15vh;
+}
+
+.site{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background:white;
+    z-index:999;
+}

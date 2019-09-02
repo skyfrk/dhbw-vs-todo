@@ -1,0 +1,75 @@
+.model {
+    height: 100%;
+    width: 100%;
+    background: rgba(240, 240, 240, 40%);
+    position: fixed;
+    top: 64px;
+    left: 0px;
+    z-index: 100;
+}
+
+.content {
+    z-index: 200;
+    position: relative;
+    margin: 20px auto 0px auto;
+    height: 65vh;
+    width: 65vw;
+    background: white;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 25px;
+    @media only screen and (min-height: 900px) {
+        // top: 50%;
+    }
+}
+
+.icon-container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 65vh;
+    padding: 1vw;
+    // position: relative;
+    // float: left;
+}
+
+.icon {
+    font-size: 60px;
+    translate: translateY(-50%);
+    margin-top: 25px;
+    cursor: pointer;
+    @media only screen and (min-width: 900px) {
+        font-size: 6.7vw;
+    }
+    @media only screen and (min-width: 1000px) {
+        font-size: 68px;
+    }
+    &:hover {
+        background-color: lightgray;
+        transition: .25s;
+        border-radius: 5px;
+    }
+    // &:hover {
+    //     font-size: 150px;
+    //     margin: 0px;
+    //     transition: .25s;
+    // }
+}
+
+.cancel-button {
+    margin-left: 20px;
+    color: darkgray;
+    right: 10px;
+    position: relative;
+    float: right;
+    cursor: pointer;
+    .button {
+        font-size: 50px;
+    }
+    &:hover {
+        color: red;
+    }
+}
+
+// .content {
+//     overflow: scroll;
+// }

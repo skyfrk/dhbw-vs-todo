@@ -1,0 +1,44 @@
+<div class="content-wrapper" *ngIf="reportData">
+    <div class="content">
+        <div class="controls">
+            <mdl-slider [max]="30" [min]="1" [step]="1" [(ngModel)]="days"></mdl-slider>
+            Zeitraum: {{days}}
+            <span *ngIf="days == 1">Tag</span>
+            <span *ngIf="days != 1">Tage</span>
+        </div>
+
+        <!-- <div class="seperator">Dashboard</div> -->
+
+        <app-info-tile [title]="'Offene Aufgaben'" [info]="reportData.openTaskCount" [icon]="'list_alt'"
+            routerLink="{{linkTo}}" [queryParams]="{ state : 0 }">
+        </app-info-tile>
+        <div class="info-wrapper">
+            <div>
+                <app-info-tile [title]="'Erledigt'" [info]="reportData.finishedTaskCount" [icon]="'check'"
+                    smallScreen="true">
+                </app-info-tile>
+                <app-info-tile [title]="'Aktiv'" [info]="reportData.inProgressTaskCount" [icon]="'build'"
+                    smallScreen="true"></app-info-tile>
+                <app-info-tile [title]="'Verspätet'" [info]="reportData.finishedOverdueTaskCount" [icon]="'alarm_on'"
+                    smallScreen="true"></app-info-tile>
+            </div>
+            <div>
+                <app-info-tile [title]="'Neu'" [info]="reportData.createdTaskCount" [icon]="'add_circle_outline'"
+                    smallScreen="true">
+                </app-info-tile>
+                <app-info-tile [title]="'Abgebrochen'" [info]="reportData.cancelledTaskCount" [icon]="'delete'"
+                    smallScreen="true">
+                </app-info-tile>
+                <app-info-tile [title]="'Überfällig'" [info]="reportData.openOverdueTaskCount" [icon]="'alarm_off'"
+                    smallScreen="true">
+                </app-info-tile>
+            </div>
+        </div>
+        <div class="seperator">Wichtige Aufgaben</div>
+        <div>
+            <app-info-tile [title]="item.description" routerLink="../todos/{{item.taskListId}}"
+                [queryParams]="{ sel : item.id }" [info]="item.title" [icon]="'list_alt'"
+                *ngFor="let item of reportData.urgentTasks"></app-info-tile>
+        </div>
+    </div>
+</div>

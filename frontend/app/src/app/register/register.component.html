@@ -1,0 +1,44 @@
+<div class="background">
+
+    <div class="inputs" *ngIf="!dataSend" [mdl-shadow]="24">
+        <form [formGroup]="form">
+            <div class="inputRange">
+                <div class="fields">
+                    <mdl-textfield type="text" label="Benutzername..." floating-label name="displayName"
+                        formControlName="name" error-msg="Der Benutzername muss mind 5 Zeichen lang sein"
+                        disableNativeValidityChecking [class.is-invalid]="nameInvalid">
+                    </mdl-textfield>
+                    <mdl-textfield type="e-mail" label="E-Mail..." floating-label name="mail" formControlName="mail"
+                        error-msg="Geben Sie eine richtige E-Mail Adresse ein" [class.is-invalid]="emailInvalid"
+                        disableNativeValidityChecking>
+                    </mdl-textfield>
+                    <mdl-textfield type="password" label="Passwort..." formControlName="passwd"
+                        error-msg="Das Passwort muss mit einem Buchstaben anfangen, mind 8 Zeichen lang sein und mind. eine Zahl, einen großen und einen kleinen Buchstaben beinhalten"
+                        floating-label name="password" [class.is-invalid]="passwdInvalid" disableNativeValidityChecking>
+                    </mdl-textfield>
+                    <mdl-textfield type="password" label="Passwort wiederholen..." formControlName="passwdConfirm"
+                        error-msg="Passwörter müssen übereinstimmen" floating-label
+                        [class.is-invalid]="passwdConfirmInvalid" disableNativeValidityChecking>
+                    </mdl-textfield>
+
+                </div>
+                <div *ngIf="registerFailed">
+                    Ups! Irgend etwas ist schief gelaufen!
+                </div>
+                <div>
+                    <button mdl-button mdl-button-type="raised" class="add-button" mdl-colored="primary"
+                        (click)="onSubmit()" mdl-ripple>Registrieren</button>
+                    <div>
+                        <a routerLink="/login">Account vorhanden?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="inputs" *ngIf="dataSend">
+        Eine E-Mail wurden an {{mail}} versendet.
+        <div>
+            <a routerLink="/login">Zum Login</a>
+        </div>
+    </div>
+</div>

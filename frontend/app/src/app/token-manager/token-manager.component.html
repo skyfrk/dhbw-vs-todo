@@ -1,0 +1,33 @@
+<div class="content-container">
+    <mdl-list class="list">
+        <mdl-list-item lines="2" class="list-item" *ngFor="let item of Data">
+            <mdl-list-item-primary-content>
+                <mdl-icon class="delte-token" mdl-list-item-avatar (click)="deleteDialog.show()">delete</mdl-icon>
+
+                <mdl-dialog #deleteDialog [mdl-dialog-config]="{
+                    clickOutsideToClose: true,
+                    styles:{'width': '300px'},
+                    isModal:true,
+                    openFrom: editUserButton,
+                    enterTransitionDuration: 400,
+                    leaveTransitionDuration: 400}">
+                    <h3 class="mdl-dialog__title">Wirklich löschen?</h3>
+                    <div class="mdl-dialog__content">
+                        <mdl-textfield #passwd autofocus floating-label label="Passwort" type="password">
+                        </mdl-textfield>
+                    </div>
+                    <div class="mdl-dialog__actions">
+                        <button (click)="delete(passwd.value, item); deleteDialog.close();" mdl-button
+                            mdl-button-type="raised" mdl-colored="primary" mdl-ripple>Löschen</button>
+                        <button (click)="deleteDialog.close()" mdl-button mdl-ripple>Abbrechen</button>
+                    </div>
+                </mdl-dialog>
+
+                <span>Zuletzt verwendet: {{item.dateLastUsed | date:'dd.MM.yyyy'}} um
+                    {{item.dateLastUsed | date:'HH:mm:ss'}} Uhr</span>
+                <mdl-list-item-sub-title>Ausgestellt am {{item.dateLastUsed | date:'dd.MM.yyyy'}} um
+                    {{item.dateLastUsed | date:'HH:mm:ss'}} Uhr</mdl-list-item-sub-title>
+            </mdl-list-item-primary-content>
+        </mdl-list-item>
+    </mdl-list>
+</div>

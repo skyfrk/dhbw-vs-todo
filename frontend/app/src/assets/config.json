@@ -1,0 +1,7 @@
+{
+    "apiServer": {
+        "route.azure": "https://dhbwtodocoredevwa.azurewebsites.net/api",
+        "route.localhost": "",
+        "use_route": "azure"
+    }
+}
